@@ -1,0 +1,5 @@
+---
+- name: install jvm debian
+  apt:
+    name: "{{ jvm_deb_package }}"
+    state: present

@@ -1,0 +1,35 @@
+- name: stop hadoop-dfs
+  command: "/bin/bash -c 'source /etc/profile.d/java_home.sh && source /etc/profile.d/hadoop_env.sh && {{ hadoop_bin }}/hdfs --daemon stop namenode'"
+  listen: "restart hadoop-dfs"
+  ignore_errors:  yes
+
+- name: start hadoop-dfs
+  command: "/bin/bash -c 'source /etc/profile.d/java_home.sh && source /etc/profile.d/hadoop_env.sh && {{ hadoop_bin }}/hdfs --daemon start namenode'"
+  listen: "restart hadoop-dfs"
+  
+- name: stop yarn-resourcemanager
+  command: "/bin/bash -c 'source /etc/profile.d/java_home.sh && source /etc/profile.d/hadoop_env.sh && {{ hadoop_bin }}/yarn --daemon stop resourcemanager'"
+  listen: "restart yarn-resourcemanager"
+  ignore_errors:  yes
+
+- name: start yarn-resourcemanager
+  command: "/bin/bash -c 'source /etc/profile.d/java_home.sh && source /etc/profile.d/hadoop_env.sh && {{ hadoop_bin }}/yarn --daemon start resourcemanager'"
+  listen: "restart yarn-resourcemanager"
+
+- name: stop hadoop-datanode
+  command: "/bin/bash -c 'source /etc/profile.d/java_home.sh && source /etc/profile.d/hadoop_env.sh && {{ hadoop_bin }}/hdfs --daemon stop datanode'"
+  listen: "restart hadoop-datanode"
+  ignore_errors:  yes
+
+- name: start hadoop-datanode
+  command: "/bin/bash -c 'source /etc/profile.d/java_home.sh && source /etc/profile.d/hadoop_env.sh && {{ hadoop_bin }}/hdfs --daemon start datanode'"
+  listen: "restart hadoop-datanode"
+
+- name: stop yarn-nodemanager
+  command: "/bin/bash -c 'source /etc/profile.d/java_home.sh && source /etc/profile.d/hadoop_env.sh && {{ hadoop_bin }}/yarn --daemon stop nodemanager'"
+  listen: "restart yarn-nodemanager"
+  ignore_errors:  yes
+
+- name: start yarn-nodemanager
+  command: "/bin/bash -c 'source /etc/profile.d/java_home.sh && source /etc/profile.d/hadoop_env.sh && {{ hadoop_bin }}/yarn --daemon start nodemanager'"
+  listen: "restart yarn-nodemanager"

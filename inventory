@@ -1,0 +1,9 @@
+# vi:ft=yaml
+all:
+  hosts:
+  children:
+    singlecluster:
+      hosts:
+        hdp-master:
+          ansible_host: 192.168.1.111
+          ansible_user: root

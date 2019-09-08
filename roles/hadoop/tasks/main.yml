@@ -1,0 +1,17 @@
+---
+- import_tasks: install.yml
+
+- name: Create Hadoop Path
+  file: 
+    path: "{{ item }}"
+    owner: "{{ hadoop_user }}"
+    group: "{{ hadoop_group }}"
+    state: directory
+    mode: '0755'
+  with_items:
+    - "{{ hadoop_create_path }}"
+
+- import_tasks: configure.yml
+
+- name: Format namenode data dir
+  command: "/bin/bash -c 'source /etc/profile.d/java_home.sh && source /etc/profile.d/hadoop_env.sh && {{ hadoop_bin }}/hdfs namenode -format -force'"

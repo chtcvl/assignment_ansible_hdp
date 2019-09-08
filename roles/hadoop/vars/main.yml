@@ -1,0 +1,60 @@
+---
+jvm_home: "/usr/lib/jvm"
+
+download_path: "/tmp"
+hadoop_src_url: "https://archive.apache.org/dist/hadoop/core/hadoop-{{ hadoop_version }}/hadoop-{{ hadoop_version }}.tar.gz"
+hadoop_archive_path: "{{download_path}}/hadoop-{{ hadoop_version }}.tar.gz"
+hadoop_path: "/opt/hadoop"
+hadoop_config_path: "{{ hadoop_path }}/hadoop-{{hadoop_version}}/etc/hadoop"
+hadoop_bin: "{{ hadoop_path }}/hadoop-{{hadoop_version}}/bin"
+hadoop_tmp: "{{ hadoop_path }}/tmp"
+hadoop_dfs_name: "{{ hadoop_path }}/dfs/name"
+hadoop_dfs_data: "{{ hadoop_path }}/dfs/data"
+hadoop_log_path: "{{ hadoop_path }}/hadoop_logs"
+
+hadoop_create_path:
+  - "{{ hadoop_tmp }}"
+  - "{{ hadoop_dfs_name }}"
+  - "{{ hadoop_dfs_data }}"
+  - "{{ hadoop_log_path }}"
+
+master_ip: "localhost"
+hdfs_port: 9000
+core_site_properties:
+  - {
+      "name":"fs.defaultFS",
+      "value":"hdfs://{{ master_ip }}:{{ hdfs_port }}"
+  }
+
+dfs_namenode_httpport: 9001
+hdfs_site_properties:
+  - {
+      "name":"dfs.replication",
+      "value":"1"
+  }
+
+mapred_site_properties:
+ - {
+   "name": "mapreduce.framework.name",
+   "value": "yarn"
+ }
+ - {
+   "name": "mapreduce.application.classpath",
+   "value": "$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*"
+ }
+
+yarn_resourcemanager_port: 8040
+yarn_resourcemanager_scheduler_port: 8030
+yarn_resourcemanager_webapp_port: 8088
+yarn_resourcemanager_tracker_port: 8025
+yarn_resourcemanager_admin_port: 8141
+
+yarn_site_properties:
+  - {
+    "name": "yarn.nodemanager.aux-services",
+    "value": "mapreduce_shuffle"
+  } 
+  - {
+    "name": "yarn.nodemanager.env-whitelist",
+    "value": "JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME"
+  }

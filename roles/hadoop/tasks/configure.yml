@@ -1,0 +1,59 @@
+---
+- name: Copy Hadoop core-site.xml
+  template:
+    src: core-site.xml
+    dest: "{{ hadoop_config_path }}"
+    mode: "0644"
+    owner: "{{ hadoop_user }}"
+    group: "{{ hadoop_group }}"
+  notify:
+   - restart hadoop-dfs
+   - restart yarn-resourcemanager
+   - restart hadoop-datanode
+   - restart yarn-nodemanager
+
+- name: Copy Hadoop hdfs-site.xml
+  template:
+    src: hdfs-site.xml
+    dest: "{{ hadoop_config_path }}"
+    mode: "0644"
+    owner: "{{ hadoop_user }}"
+    group: "{{ hadoop_group }}"
+  notify:
+   - restart hadoop-dfs
+   - restart yarn-resourcemanager
+   - restart hadoop-datanode
+   - restart yarn-nodemanager
+
+- name: Copy Hadoop mapred-site.xml
+  template:
+    src: mapred-site.xml
+    dest: "{{ hadoop_config_path }}"
+    mode: "0644"
+    owner: "{{ hadoop_user }}"
+    group: "{{ hadoop_group }}"
+  notify:
+   - restart hadoop-dfs
+   - restart yarn-resourcemanager
+   - restart hadoop-datanode
+   - restart yarn-nodemanager
+
+- name: Copy Hadoop yarn-site.xml
+  template:
+    src: yarn-site.xml
+    dest: "{{ hadoop_config_path }}"
+    mode: "0644"
+    owner: "{{ hadoop_user }}"
+    group: "{{ hadoop_group }}"
+  notify:
+   - restart hadoop-dfs
+   - restart yarn-resourcemanager
+   - restart hadoop-datanode
+   - restart yarn-nodemanager
+
+- name: Copy Hadoop Env Script
+  template:
+    src: hadoop_env.sh
+    dest: /etc/profile.d/
+    mode: "0755"
+

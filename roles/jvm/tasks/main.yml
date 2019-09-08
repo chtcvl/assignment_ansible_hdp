@@ -1,0 +1,8 @@
+---
+- name: install jvm common
+  include_tasks: "{{ ansible_facts['os_family'] | lower }}.yml"
+
+- name: Copy Java Home Script
+  template:
+    src: java_home.sh
+    dest: /etc/profile.d

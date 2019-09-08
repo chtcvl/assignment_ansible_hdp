@@ -1,0 +1,15 @@
+---
+- name: "Download {{ hadoop_version }}"
+  get_url:
+    url: "{{ hadoop_src_url }}"
+    dest: "{{ hadoop_archive_path }}"
+  register: result
+  until: result is success
+  retries: 5
+  delay: 2
+
+- name: Unarchive hadoop tgz
+  unarchive:
+    src: "{{ hadoop_archive_path }}"
+    dest: "{{ hadoop_path }}"
+    remote_src: yes

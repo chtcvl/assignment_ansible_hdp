@@ -1,0 +1,7 @@
+- hosts: singlecluster
+  vars_files:
+    - vars/common.yml
+  roles:
+    - users
+    - jvm 
+    - hadoop

@@ -1,0 +1,6 @@
+---
+- name: install jvm redhat
+  yum:
+    name: "{{ jvm_rhel_package }}"
+    state: present
+

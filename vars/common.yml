@@ -1,0 +1,4 @@
+hadoop_path: "/opt/hadoop"
+hadoop_version: "3.0.0"
+hadoop_user: hadoop
+hadoop_group: hadoop
